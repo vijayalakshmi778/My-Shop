@@ -1,253 +1,60 @@
-const products = [
-    {
-        id: 1,
-        name: "Smartphone",
-        price: 29999
-    },
+/* =====================================================
+   MY SHOP - CART JAVASCRIPT
+===================================================== */
 
-    {
-        id: 2,
-        name: "Laptop",
-        price: 59999
-    },
 
-    {
-        id: 3,
-        name: "Headphones",
-        price: 2999
-    },
+/* =====================================================
+   GET CART FROM LOCAL STORAGE
+===================================================== */
 
-    {
-        id: 4,
-        name: "Smart Watch",
-        price: 4999
-    }
-];
+let cart = JSON.parse(
+    localStorage.getItem("cart")
+) || [];
 
 
-// Load cart from localStorage
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
+const cartItemsContainer =
+    document.getElementById("cart-items");
 
-// Add product to cart
+const emptyCart =
+    document.getElementById("empty-cart");
 
-function addToCart(productId) {
+const cartCount =
+    document.getElementById("cart-count");
 
-    const product = products.find(
-        item => item.id === productId
-    );
+const itemsCount =
+    document.getElementById("items-count");
 
-    const existingProduct = cart.find(
-        item => item.id === productId
-    );
+const subtotalElement =
+    document.getElementById("subtotal");
 
-    if (existingProduct) {
+const shippingElement =
+    document.getElementById("shipping");
 
-        existingProduct.quantity++;
+const discountElement =
+    document.getElementById("discount");
 
-    } else {
+const totalElement =
+    document.getElementById("total");
 
-        cart.push({
-            ...product,
-            quantity: 1
-        });
+const checkoutButton =
+    document.getElementById("checkout-btn");
 
-    }
+const menuToggle =
+    document.getElementById("menu-toggle");
 
-    saveCart();
+const navLinks =
+    document.querySelector(".nav-links");
 
-    displayCart();
 
-    alert(product.name + " added to cart!");
-}
 
-
-// Display cart
-
-function displayCart() {
-
-    const cartItems = document.getElementById("cart-items");
-
-    cartItems.innerHTML = "";
-
-    if (cart.length === 0) {
-
-        cartItems.innerHTML =
-            `<p class="empty-cart">Your cart is empty.</p>`;
-
-        updateSummary();
-
-        return;
-    }
-
-
-    cart.forEach(item => {
-
-        const cartItem = document.createElement("div");
-
-        cartItem.className = "cart-item";
-
-        cartItem.innerHTML = `
-
-            <div class="cart-item-info">
-
-                <h3>${item.name}</h3>
-
-                <p>₹${item.price.toLocaleString()}</p>
-
-            </div>
-
-
-            <div class="quantity-controls">
-
-                <button onclick="decreaseQuantity(${item.id})">
-                    -
-                </button>
-
-                <span>${item.quantity}</span>
-
-                <button onclick="increaseQuantity(${item.id})">
-                    +
-                </button>
-
-            </div>
-
-
-            <strong>
-                ₹${(item.price * item.quantity).toLocaleString()}
-            </strong>
-
-
-            <button
-                class="remove-btn"
-                onclick="removeFromCart(${item.id})">
-
-                Remove
-
-            </button>
-        `;
-
-        cartItems.appendChild(cartItem);
-
-    });
-
-
-    updateSummary();
-}
-
-
-// Increase quantity
-
-function increaseQuantity(productId) {
-
-    const item = cart.find(
-        item => item.id === productId
-    );
-
-    if (item) {
-        item.quantity++;
-    }
-
-    saveCart();
-
-    displayCart();
-}
-
-
-// Decrease quantity
-
-function decreaseQuantity(productId) {
-
-    const item = cart.find(
-        item => item.id === productId
-    );
-
-    if (item) {
-
-        item.quantity--;
-
-        if (item.quantity <= 0) {
-
-            cart = cart.filter(
-                item => item.id !== productId
-            );
-
-        }
-
-    }
-
-    saveCart();
-
-    displayCart();
-}
-
-
-// Remove item
-
-function removeFromCart(productId) {
-
-    cart = cart.filter(
-        item => item.id !== productId
-    );
-
-    saveCart();
-
-    displayCart();
-}
-
-
-// Update cart summary
-
-function updateSummary() {
-
-    let subtotal = 0;
-
-    let totalItems = 0;
-
-
-    cart.forEach(item => {
-
-        subtotal += item.price * item.quantity;
-
-        totalItems += item.quantity;
-
-    });
-
-
-    // Free shipping above ₹1000
-
-    let shipping = 0;
-
-    if (subtotal > 0 && subtotal < 1000) {
-
-        shipping = 100;
-
-    }
-
-
-    const total = subtotal + shipping;
-
-
-    document.getElementById("subtotal").textContent =
-        "₹" + subtotal.toLocaleString();
-
-
-    document.getElementById("shipping").textContent =
-        "₹" + shipping.toLocaleString();
-
-
-    document.getElementById("total").textContent =
-        "₹" + total.toLocaleString();
-
-
-    document.getElementById("cart-count").textContent =
-        totalItems;
-
-}
-
-
-// Save cart
+/* =====================================================
+   SAVE CART
+===================================================== */
 
 function saveCart() {
 
@@ -259,42 +66,421 @@ function saveCart() {
 }
 
 
-// Checkout
 
-function checkout() {
+/* =====================================================
+   DISPLAY CART
+===================================================== */
+
+function displayCart() {
+
+    cartItemsContainer.innerHTML = "";
+
+
+    /* Empty cart */
 
     if (cart.length === 0) {
 
-        alert("Your cart is empty!");
+        emptyCart.style.display = "block";
+
+        updateSummary();
 
         return;
+
     }
 
 
-    let total = 0;
+    emptyCart.style.display = "none";
 
-    cart.forEach(item => {
 
-        total += item.price * item.quantity;
+    /* Display every product */
+
+    cart.forEach((item, index) => {
+
+        const cartItem =
+            document.createElement("div");
+
+
+        cartItem.className =
+            "cart-item";
+
+
+        cartItem.innerHTML = `
+
+            <div class="item-image">
+                ${item.image || "🛍️"}
+            </div>
+
+
+            <div class="item-info">
+
+                <h4>
+                    ${item.name}
+                </h4>
+
+                <p>
+                    Quality product from My Shop
+                </p>
+
+                <div class="item-price">
+                    ₹${Number(item.price).toLocaleString("en-IN")}
+                </div>
+
+            </div>
+
+
+            <div class="item-actions">
+
+                <div class="quantity-control">
+
+                    <button
+                        onclick="decreaseQuantity(${index})">
+
+                        −
+
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button
+                        onclick="increaseQuantity(${index})">
+
+                        +
+
+                    </button>
+
+                </div>
+
+
+                <button
+                    class="remove-btn"
+                    onclick="removeItem(${index})">
+
+                    Remove
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        cartItemsContainer.appendChild(
+            cartItem
+        );
 
     });
 
 
-    alert(
-        "Order placed successfully! 🎉\n\n" +
-        "Total Amount: ₹" +
-        total.toLocaleString()
-    );
+    updateSummary();
+
+}
 
 
-    cart = [];
+
+/* =====================================================
+   INCREASE QUANTITY
+===================================================== */
+
+function increaseQuantity(index) {
+
+    cart[index].quantity++;
 
     saveCart();
 
     displayCart();
+
 }
 
 
-// Display cart when page loads
+
+/* =====================================================
+   DECREASE QUANTITY
+===================================================== */
+
+function decreaseQuantity(index) {
+
+    if (cart[index].quantity > 1) {
+
+        cart[index].quantity--;
+
+    } else {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    saveCart();
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   REMOVE PRODUCT
+===================================================== */
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   UPDATE ORDER SUMMARY
+===================================================== */
+
+function updateSummary() {
+
+    let subtotal = 0;
+
+    let totalItems = 0;
+
+
+    cart.forEach(item => {
+
+        subtotal +=
+            Number(item.price) *
+            Number(item.quantity);
+
+        totalItems +=
+            Number(item.quantity);
+
+    });
+
+
+    /* -----------------------------------------------
+       SHIPPING
+
+       Free shipping for orders above ₹1000.
+       ₹50 shipping below ₹1000.
+    ------------------------------------------------ */
+
+    let shipping = 0;
+
+    if (
+        subtotal > 0 &&
+        subtotal < 1000
+    ) {
+
+        shipping = 50;
+
+    }
+
+
+    /* -----------------------------------------------
+       DISCOUNT
+
+       ₹100 discount for orders above ₹2000.
+    ------------------------------------------------ */
+
+    let discount = 0;
+
+    if (subtotal >= 2000) {
+
+        discount = 100;
+
+    }
+
+
+    /* -----------------------------------------------
+       FINAL TOTAL
+    ------------------------------------------------ */
+
+    const total =
+        subtotal +
+        shipping -
+        discount;
+
+
+
+    /* Subtotal */
+
+    subtotalElement.textContent =
+        `₹${subtotal.toLocaleString(
+            "en-IN",
+            {
+                minimumFractionDigits: 2
+            }
+        )}`;
+
+
+
+    /* Shipping */
+
+    if (
+        subtotal > 0 &&
+        shipping === 0
+    ) {
+
+        shippingElement.textContent =
+            "FREE";
+
+    } else {
+
+        shippingElement.textContent =
+            `₹${shipping.toLocaleString(
+                "en-IN",
+                {
+                    minimumFractionDigits: 2
+                }
+            )}`;
+
+    }
+
+
+
+    /* Discount */
+
+    discountElement.textContent =
+        `-₹${discount.toLocaleString(
+            "en-IN",
+            {
+                minimumFractionDigits: 2
+            }
+        )}`;
+
+
+
+    /* Total */
+
+    totalElement.textContent =
+        `₹${total.toLocaleString(
+            "en-IN",
+            {
+                minimumFractionDigits: 2
+            }
+        )}`;
+
+
+
+    /* Cart badge */
+
+    cartCount.textContent =
+        totalItems;
+
+
+
+    /* Item count */
+
+    itemsCount.textContent =
+        `${totalItems} ${
+            totalItems === 1
+                ? "Item"
+                : "Items"
+        }`;
+
+
+
+    /* Checkout button */
+
+    checkoutButton.disabled =
+        cart.length === 0;
+
+}
+
+
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+
+checkoutButton.addEventListener(
+    "click",
+    function () {
+
+        if (cart.length === 0) {
+
+            alert(
+                "Your cart is empty!"
+            );
+
+            return;
+
+        }
+
+
+        const confirmOrder =
+            confirm(
+                "Are you sure you want to continue to checkout?"
+            );
+
+
+        if (confirmOrder) {
+
+            alert(
+                "🎉 Thank you for shopping with My Shop!"
+            );
+
+
+            /* Clear cart */
+
+            cart = [];
+
+            saveCart();
+
+            displayCart();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   MOBILE NAVIGATION
+===================================================== */
+
+menuToggle.addEventListener(
+    "click",
+    function () {
+
+        navLinks.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   CLOSE MOBILE MENU WHEN LINK IS CLICKED
+===================================================== */
+
+document
+    .querySelectorAll(".nav-links a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                navLinks.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+    });
+
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
 displayCart();
+

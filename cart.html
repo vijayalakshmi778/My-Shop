@@ -1,155 +1,489 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopEasy - Shopping Cart</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="My Shop shopping cart - review your selected products and order.">
+
+    <title>Cart - My Shop</title>
 
     <link rel="stylesheet" href="cart.css">
+
 </head>
+
 
 <body>
 
-    <!-- Navbar -->
-    <header>
-        <div class="logo">ShopEasy</div>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Cart 🛒 <span id="cart-count">0</span></a>
-        </nav>
-    </header>
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background-shapes">
+
+    <span class="shape shape-1"></span>
+    <span class="shape shape-2"></span>
+    <span class="shape shape-3"></span>
+
+</div>
 
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <span class="logo-icon">✦</span>
+
         <div>
-            <h1>Welcome to ShopEasy</h1>
-            <p>Find your favorite products at the best prices.</p>
-            <a href="#products" class="shop-btn">Shop Now</a>
-        </div>
-    </section>
-
-
-    <!-- Products -->
-    <section class="products-section" id="products">
-
-        <h2>Our Products</h2>
-
-        <div class="products-container">
-
-            <!-- Product 1 -->
-            <div class="product-card">
-                <div class="product-image">📱</div>
-
-                <h3>Smartphone</h3>
-                <p class="description">Latest smartphone with powerful performance.</p>
-
-                <p class="price">₹29,999</p>
-
-                <button onclick="addToCart(1)">
-                    Add to Cart
-                </button>
-            </div>
-
-
-            <!-- Product 2 -->
-            <div class="product-card">
-                <div class="product-image">💻</div>
-
-                <h3>Laptop</h3>
-                <p class="description">High performance laptop for work and study.</p>
-
-                <p class="price">₹59,999</p>
-
-                <button onclick="addToCart(2)">
-                    Add to Cart
-                </button>
-            </div>
-
-
-            <!-- Product 3 -->
-            <div class="product-card">
-                <div class="product-image">🎧</div>
-
-                <h3>Headphones</h3>
-                <p class="description">Wireless headphones with clear sound.</p>
-
-                <p class="price">₹2,999</p>
-
-                <button onclick="addToCart(3)">
-                    Add to Cart
-                </button>
-            </div>
-
-
-            <!-- Product 4 -->
-            <div class="product-card">
-                <div class="product-image">⌚</div>
-
-                <h3>Smart Watch</h3>
-                <p class="description">Track your fitness and daily activities.</p>
-
-                <p class="price">₹4,999</p>
-
-                <button onclick="addToCart(4)">
-                    Add to Cart
-                </button>
-            </div>
-
+            <h1>My Shop</h1>
+            <span>Shop Smart. Live Better.</span>
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- Cart -->
-    <section class="cart-section" id="cart">
+    <nav class="nav-links">
 
-        <h2>Shopping Cart 🛒</h2>
+        <a href="index.html">
+            Home
+        </a>
 
-        <div id="cart-items">
-            <p class="empty-cart">Your cart is empty.</p>
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="cart.html" class="active">
+            Cart 🛒
+            <span id="cart-count">0</span>
+        </a>
+
+    </nav>
+
+
+    <button class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Open navigation menu">
+
+        ☰
+
+    </button>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     CART HERO
+===================================================== -->
+
+<section class="cart-hero">
+
+    <div class="hero-content">
+
+        <span class="small-title">
+            YOUR SHOPPING CART
+        </span>
+
+        <h2>
+
+            Your
+
+            <span>
+                Cart.
+            </span>
+
+        </h2>
+
+        <p>
+            Review your selected products,
+            update quantities and continue shopping.
+        </p>
+
+    </div>
+
+
+    <div class="cart-hero-icon">
+
+        🛒
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CART AREA
+===================================================== -->
+
+<section class="cart-section">
+
+
+    <!-- =================================================
+         CART ITEMS
+    ================================================== -->
+
+    <div class="cart-container">
+
+        <div class="cart-heading">
+
+            <div>
+
+                <span>
+                    SHOPPING CART
+                </span>
+
+                <h3>
+                    Your Items
+                </h3>
+
+            </div>
+
+            <strong id="items-count">
+                0 Items
+            </strong>
+
         </div>
 
-        <div class="cart-summary">
 
-            <h3>Cart Summary</h3>
+        <!-- Products appear here -->
 
-            <p>
-                Subtotal:
-                <span id="subtotal">₹0</span>
-            </p>
+        <div id="cart-items"
+             class="cart-items">
+        </div>
 
-            <p>
-                Shipping:
-                <span id="shipping">₹0</span>
-            </p>
 
-            <hr>
+        <!-- Empty cart -->
+
+        <div id="empty-cart"
+             class="empty-cart">
+
+            <div class="empty-icon">
+                🛒
+            </div>
 
             <h3>
-                Total:
-                <span id="total">₹0</span>
+                Your cart is empty
             </h3>
 
-            <button class="checkout-btn" onclick="checkout()">
-                Proceed to Checkout
-            </button>
+            <p>
+                You haven't added any products yet.
+            </p>
+
+            <a href="products.html"
+               class="shop-button">
+
+                Explore Products
+                <span>→</span>
+
+            </a>
 
         </div>
 
-    </section>
+
+        <a href="products.html"
+           class="continue-shopping">
+
+            ← Continue Shopping
+
+        </a>
+
+    </div>
 
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 ShopEasy. All Rights Reserved.</p>
-    </footer>
+
+    <!-- =================================================
+         ORDER SUMMARY
+    ================================================== -->
+
+    <aside class="summary-container">
+
+        <div class="summary-heading">
+
+            <span>
+                ORDER SUMMARY
+            </span>
+
+            <h3>
+                Your Order
+            </h3>
+
+        </div>
 
 
-    <script src="cart.js"></script>
+        <div class="summary-row">
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong id="subtotal">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Shipping
+            </span>
+
+            <strong id="shipping">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row discount">
+
+            <span>
+                Discount
+            </span>
+
+            <strong id="discount">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <div class="total-row">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="total">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <button id="checkout-btn"
+                class="checkout-button"
+                disabled>
+
+            Proceed to Checkout
+
+            <span>→</span>
+
+        </button>
+
+
+        <div class="secure-payment">
+
+            <span class="secure-icon">
+                🔒
+            </span>
+
+            <div>
+
+                <strong>
+                    Secure Shopping
+                </strong>
+
+                <small>
+                    Your shopping information is protected.
+                </small>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     BENEFITS
+===================================================== -->
+
+<section class="cart-benefits">
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            🚚
+        </div>
+
+        <div>
+
+            <h3>
+                Easy Delivery
+            </h3>
+
+            <p>
+                Fast and convenient delivery.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            💎
+        </div>
+
+        <div>
+
+            <h3>
+                Quality Products
+            </h3>
+
+            <p>
+                Products selected for great value.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            💳
+        </div>
+
+        <div>
+
+            <h3>
+                Easy Checkout
+            </h3>
+
+            <p>
+                Simple and convenient shopping.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <div class="logo">
+
+                <span class="logo-icon">
+                    ✦
+                </span>
+
+                <div>
+
+                    <h2>
+                        My Shop
+                    </h2>
+
+                    <span>
+                        Shop Smart. Live Better.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <p>
+                Quality products.
+                Affordable prices.
+                Happy shopping.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="cart.html">
+                Cart 🛒
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 My Shop. All Rights Reserved.
+        </p>
+
+        <p>
+            Made with <span>♥</span>
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script src="cart.js"></script>
 
 </body>
+
 </html>
+
