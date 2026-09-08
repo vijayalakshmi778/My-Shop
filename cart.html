@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="My Shop shopping cart - review your selected products and order.">
+
+    <title>Cart - My Shop</title>
+
+    <link rel="stylesheet" href="cart.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background-shapes">
+
+    <span class="shape shape-1"></span>
+    <span class="shape shape-2"></span>
+    <span class="shape shape-3"></span>
+
+</div>
+
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <span class="logo-icon">✦</span>
+
+        <div>
+            <h1>My Shop</h1>
+            <span>Shop Smart. Live Better.</span>
+        </div>
+
+    </div>
+
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="cart.html" class="active">
+            Cart 🛒
+            <span id="cart-count">0</span>
+        </a>
+
+    </nav>
+
+
+    <button class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Open navigation menu">
+
+        ☰
+
+    </button>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     CART HERO
+===================================================== -->
+
+<section class="cart-hero">
+
+    <div class="hero-content">
+
+        <span class="small-title">
+            YOUR SHOPPING CART
+        </span>
+
+        <h2>
+
+            Your
+
+            <span>
+                Cart.
+            </span>
+
+        </h2>
+
+        <p>
+            Review your selected products,
+            update quantities and continue shopping.
+        </p>
+
+    </div>
+
+
+    <div class="cart-hero-icon">
+
+        🛒
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CART AREA
+===================================================== -->
+
+<section class="cart-section">
+
+
+    <!-- =================================================
+         CART ITEMS
+    ================================================== -->
+
+    <div class="cart-container">
+
+        <div class="cart-heading">
+
+            <div>
+
+                <span>
+                    SHOPPING CART
+                </span>
+
+                <h3>
+                    Your Items
+                </h3>
+
+            </div>
+
+            <strong id="items-count">
+                0 Items
+            </strong>
+
+        </div>
+
+
+        <!-- Products appear here -->
+
+        <div id="cart-items"
+             class="cart-items">
+        </div>
+
+
+        <!-- Empty cart -->
+
+        <div id="empty-cart"
+             class="empty-cart">
+
+            <div class="empty-icon">
+                🛒
+            </div>
+
+            <h3>
+                Your cart is empty
+            </h3>
+
+            <p>
+                You haven't added any products yet.
+            </p>
+
+            <a href="products.html"
+               class="shop-button">
+
+                Explore Products
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+
+        <a href="products.html"
+           class="continue-shopping">
+
+            ← Continue Shopping
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ORDER SUMMARY
+    ================================================== -->
+
+    <aside class="summary-container">
+
+        <div class="summary-heading">
+
+            <span>
+                ORDER SUMMARY
+            </span>
+
+            <h3>
+                Your Order
+            </h3>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong id="subtotal">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Shipping
+            </span>
+
+            <strong id="shipping">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row discount">
+
+            <span>
+                Discount
+            </span>
+
+            <strong id="discount">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="summary-divider"></div>
+
+
+        <div class="total-row">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="total">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <button id="checkout-btn"
+                class="checkout-button"
+                disabled>
+
+            Proceed to Checkout
+
+            <span>→</span>
+
+        </button>
+
+
+        <div class="secure-payment">
+
+            <span class="secure-icon">
+                🔒
+            </span>
+
+            <div>
+
+                <strong>
+                    Secure Shopping
+                </strong>
+
+                <small>
+                    Your shopping information is protected.
+                </small>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     BENEFITS
+===================================================== -->
+
+<section class="cart-benefits">
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            🚚
+        </div>
+
+        <div>
+
+            <h3>
+                Easy Delivery
+            </h3>
+
+            <p>
+                Fast and convenient delivery.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            💎
+        </div>
+
+        <div>
+
+            <h3>
+                Quality Products
+            </h3>
+
+            <p>
+                Products selected for great value.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            💳
+        </div>
+
+        <div>
+
+            <h3>
+                Easy Checkout
+            </h3>
+
+            <p>
+                Simple and convenient shopping.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <div class="logo">
+
+                <span class="logo-icon">
+                    ✦
+                </span>
+
+                <div>
+
+                    <h2>
+                        My Shop
+                    </h2>
+
+                    <span>
+                        Shop Smart. Live Better.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <p>
+                Quality products.
+                Affordable prices.
+                Happy shopping.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="cart.html">
+                Cart 🛒
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 My Shop. All Rights Reserved.
+        </p>
+
+        <p>
+            Made with <span>♥</span>
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script src="cart.js"></script>
+
+</body>
+
+</html>
+
