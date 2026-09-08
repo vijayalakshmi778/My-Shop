@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Shop - Products</title>
+
+    <link rel="stylesheet" href="products.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>My Shop</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html" class="active">Products</a>
+
+            <a href="cart.html" class="cart-link">
+                Cart 🛒
+                <span class="cart-count">0</span>
+            </a>
+        </nav>
+
+        <button class="menu-toggle" aria-label="Toggle menu">
+            ☰
+        </button>
+
+    </header>
+
+
+    <!-- ================= PRODUCT HERO ================= -->
+
+    <main>
+
+        <section class="products-hero">
+
+            <div class="hero-orb orb-one"></div>
+            <div class="hero-orb orb-two"></div>
+            <div class="hero-orb orb-three"></div>
+
+            <div class="hero-particle particle-one"></div>
+            <div class="hero-particle particle-two"></div>
+            <div class="hero-particle particle-three"></div>
+            <div class="hero-particle particle-four"></div>
+
+            <div class="products-hero-content">
+
+                <div class="hero-badge">
+                    ✨ PREMIUM COLLECTION
+                </div>
+
+                <h1>
+                    Find something
+                    <span>you'll love.</span>
+                </h1>
+
+                <p>
+                    Explore our carefully selected collection
+                    of quality products, amazing prices,
+                    and everyday essentials.
+                </p>
+
+                <div class="hero-stats">
+
+                    <div>
+                        <strong id="heroProductCount">12+</strong>
+                        <span>Products</span>
+                    </div>
+
+                    <div class="stat-line"></div>
+
+                    <div>
+                        <strong>100%</strong>
+                        <span>Quality</span>
+                    </div>
+
+                    <div class="stat-line"></div>
+
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Support</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Floating visual -->
+
+            <div class="hero-product-showcase">
+
+                <div class="showcase-glow"></div>
+
+                <div class="showcase-card">
+
+                    <div class="showcase-top">
+                        <span>NEW ARRIVAL</span>
+                        <button>♡</button>
+                    </div>
+
+                    <div class="showcase-image">
+                        🎧
+                    </div>
+
+                    <div class="showcase-info">
+                        <small>TECH COLLECTION</small>
+                        <h3>Premium Headphones</h3>
+
+                        <div class="showcase-price">
+                            <strong>₹2,499</strong>
+                            <del>₹3,999</del>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mini-floating floating-one">
+                    ⭐
+                    <span>Top Rated</span>
+                </div>
+
+                <div class="mini-floating floating-two">
+                    🔥
+                    <span>Trending</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCT SECTION ================= -->
+
+        <section class="products-section">
+
+            <div class="section-heading reveal">
+
+                <span>OUR COLLECTION</span>
+
+                <h2>
+                    Explore our
+                    <span>products.</span>
+                </h2>
+
+                <p>
+                    Discover products selected for quality,
+                    style and everyday value.
+                </p>
+
+            </div>
+
+
+            <!-- ================= CONTROLS ================= -->
+
+            <div class="product-controls reveal">
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search products..."
+                    >
+
+                </div>
+
+
+                <div class="category-buttons">
+
+                    <button class="category-btn active" data-category="all">
+                        All
+                    </button>
+
+                    <button class="category-btn" data-category="electronics">
+                        Electronics
+                    </button>
+
+                    <button class="category-btn" data-category="fashion">
+                        Fashion
+                    </button>
+
+                    <button class="category-btn" data-category="home">
+                        Home
+                    </button>
+
+                    <button class="category-btn" data-category="accessories">
+                        Accessories
+                    </button>
+
+                </div>
+
+
+                <div class="sort-box">
+
+                    <label for="sortSelect">
+                        Sort:
+                    </label>
+
+                    <select id="sortSelect">
+
+                        <option value="default">
+                            Featured
+                        </option>
+
+                        <option value="low">
+                            Price: Low to High
+                        </option>
+
+                        <option value="high">
+                            Price: High to Low
+                        </option>
+
+                        <option value="rating">
+                            Highest Rated
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PRODUCTS ================= -->
+
+            <div class="products-grid" id="productsGrid">
+            </div>
+
+
+            <!-- Empty state -->
+
+            <div class="empty-state" id="emptyState">
+
+                <div>🔎</div>
+
+                <h3>
+                    No products found
+                </h3>
+
+                <p>
+                    Try another search or category.
+                </p>
+
+                <button id="resetFilters">
+                    Reset Filters
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PROMO BANNER ================= -->
+
+        <section class="promo-section reveal">
+
+            <div class="promo-glow"></div>
+
+            <div class="promo-content">
+
+                <span>
+                    ✨ SPECIAL OFFER
+                </span>
+
+                <h2>
+                    Upgrade your
+                    <strong>everyday.</strong>
+                </h2>
+
+                <p>
+                    Great products. Better prices.
+                    Simple shopping.
+                </p>
+
+                <button
+                    class="promo-btn"
+                    onclick="document.querySelector('.products-section').scrollIntoView({behavior:'smooth'})"
+                >
+                    Shop Collection
+                    →
+                </button>
+
+            </div>
+
+            <div class="promo-icon">
+                🛍️
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div class="toast" id="toast">
+
+        <span class="toast-icon">
+            ✓
+        </span>
+
+        <div>
+            <strong>Added to cart</strong>
+            <small>Product added successfully</small>
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+                    <span class="logo-icon">✦</span>
+                    <span>My Shop</span>
+                </div>
+
+                <p>
+                    Quality products.
+                    Affordable prices.
+                    Happy shopping.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart 🛒</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 My Shop. All rights reserved.
+            </p>
+
+            <p>
+                Made with <span>♥</span>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="products.js"></script>
+
+</body>
+</html>
